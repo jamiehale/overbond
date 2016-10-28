@@ -11,6 +11,10 @@ module Overbond
       @yield = y
     end
 
+    def term_delta( bond )
+      ( @term - bond.term ).abs
+    end
+
   end
 
 end

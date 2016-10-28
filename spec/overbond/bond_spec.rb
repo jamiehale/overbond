@@ -28,6 +28,10 @@ module Overbond
         expect( bond.yield ).to eq( 5.3 )
       end
 
+      it 'knows its term delta to another bond' do
+        expect( bond.term_delta( Bond.new( 'C2', 'corporate', 12.4, 7.2 ) ) ).to be_within( 0.1).of( 2.1 )
+      end
+
     end
 
   end
