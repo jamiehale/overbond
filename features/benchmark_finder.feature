@@ -4,6 +4,6 @@ Feature: Benchmark Finder
     I want to be able to run ...
 
     Scenario: No commands
-        When I run `benchmark_finder`
+        When I run `overbond find_benchmark`
         Then the output should contain "Usage:"
 
