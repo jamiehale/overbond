@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Overbond
 
-  describe Overbond::Bond do
+  describe Bond do
 
     it 'is creatable with an identifier, type, term, and yield' do
       expect{ Bond.new( 'C1', 'corporate', 10.3, 5.3 ) }.not_to raise_error
