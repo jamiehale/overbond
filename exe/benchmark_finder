@@ -1,0 +1,5 @@
+#! /usr/bin/env ruby
+
+require 'overbond/cli'
+Overbond::CLI.start
+
