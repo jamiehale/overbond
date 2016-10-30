@@ -22,13 +22,13 @@ Or install it yourself as:
 
 ## Usage
 
-The overbond program has 2 commands: find_benchmarks and spread_to_curves.
+The overbond program has 2 commands: benchmark and spread_to_curve.
 
-    $ overbond find_benchmarks INPUT_FILE
+    $ overbond benchmark INPUT_FILE
 
 Loops through each corporate bond in INPUT_FILE, finds the appropriate benchmark government bond (also in INPUT_FILE), and reports the spread between them.
 
-    $ overbond spread_to_curves INPUT_FILE
+    $ overbond spread_to_curve INPUT_FILE
 
 Loops through each corporate bond in INPUT_FILE, and calculates and reports the spread to the curve created by the benchmark government bonds (also in INPUT_FILE).
 
