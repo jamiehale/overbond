@@ -1,6 +1,6 @@
 module Overbond
 
-  class FindBenchmarksCommand
+  class BenchmarkCommand
 
     def initialize( options = {} )
       @loader = options[ :loader ] || BondFileLoader.new()

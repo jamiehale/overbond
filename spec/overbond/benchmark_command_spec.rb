@@ -2,40 +2,40 @@ require 'spec_helper'
 
 module Overbond
 
-  describe FindBenchmarksCommand do
+  describe BenchmarkCommand do
 
     it 'exists' do
-      expect{ FindBenchmarksCommand.new() }.not_to raise_error
+      expect{ BenchmarkCommand.new() }.not_to raise_error
     end
     
     it 'creates a new BondFileLoader if none is passed' do
       expect( BondFileLoader ).to receive( :new )
-      FindBenchmarksCommand.new()
+      BenchmarkCommand.new()
     end
 
     it 'uses the passed BondFileLoader' do
       expect( BondFileLoader ).not_to receive( :new )
-      FindBenchmarksCommand.new( :loader => double( 'loader' ) )
+      BenchmarkCommand.new( :loader => double( 'loader' ) )
     end
 
     it 'creates a new BenchmarkSpreadReporter if none is passed' do
       expect( BenchmarkSpreadReporter ).to receive( :new )
-      FindBenchmarksCommand.new()
+      BenchmarkCommand.new()
     end
 
     it 'uses the passed BenchmarkSpreadReporter' do
       expect( BenchmarkSpreadReporter ).not_to receive( :new )
-      FindBenchmarksCommand.new( :reporter => double( 'reporter' ) )
+      BenchmarkCommand.new( :reporter => double( 'reporter' ) )
     end
 
     it 'creates a new BenchmarkFinder if none is passed' do
       expect( BenchmarkFinder ).to receive( :new )
-      FindBenchmarksCommand.new()
+      BenchmarkCommand.new()
     end
 
     it 'uses the passed BenchmarkFinder' do
       expect( BenchmarkFinder ).not_to receive( :new )
-      FindBenchmarksCommand.new( :finder => double( 'finder' ) )
+      BenchmarkCommand.new( :finder => double( 'finder' ) )
     end
 
     describe 'once created' do
@@ -43,7 +43,7 @@ module Overbond
       let( :loader ) { double( 'loader' ) }
       let( :finder ) { double( 'finder' ) }
       let( :reporter ) { double( 'reporter' ) }
-      let( :command ) { FindBenchmarksCommand.new( :loader => loader, :finder => finder, :reporter => reporter ) }
+      let( :command ) { BenchmarkCommand.new( :loader => loader, :finder => finder, :reporter => reporter ) }
       let( :bonds ) { double( 'bond collection' ) }
       let( :input_stream ) { double( 'input stream' ) }
       let( :output_stream ) { double( 'output stream' ) }

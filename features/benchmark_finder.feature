@@ -1,10 +1,10 @@
 Feature: Benchmark Finder
     In order to find the benchmark for a set of corporate bonds
     As a command-line user
-    I want to be able to run the find_benchmarks command
+    I want to be able to run the benchmark command
 
     Scenario: Usage
-        When I run `overbond help find_benchmarks`
+        When I run `overbond help benchmark`
         Then the output should contain "Usage:"
 
     Scenario: A single corporate bond
@@ -15,7 +15,7 @@ Feature: Benchmark Finder
         G1,government,9.4 years,3.70%
         G2,government,12 years,4.80%
         """
-        When I run `overbond find_benchmark tmp/bonds`
+        When I run `overbond benchmark tmp/bonds`
         Then the output should contain:
         """
         bond,benchmark,spread_to_benchmark
@@ -40,7 +40,7 @@ Feature: Benchmark Finder
         G5,government,15.1 years,7.50%
         G6,government,24.2 years,9.80%
         """
-        When I run `overbond find_benchmarks tmp/bonds`
+        When I run `overbond benchmark tmp/bonds`
         Then the output should contain:
         """
         bond,benchmark,spread_to_benchmark
