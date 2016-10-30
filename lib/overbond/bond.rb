@@ -19,6 +19,10 @@ module Overbond
       ( @term - bond.term ).abs
     end
 
+    def yield_delta( bond )
+      ( @yield - bond.yield )
+    end
+
     def state
       self.instance_variables.map { |v| self.instance_variable_get v }
     end

@@ -10,7 +10,7 @@ module Overbond
     end
 
     def spread
-      ( @bond.yield - @benchmark.yield ).abs
+      @bond.yield_delta( @benchmark )
     end
 
     def to_csv
