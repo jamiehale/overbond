@@ -9,6 +9,11 @@ module Overbond
       BenchmarkCommand.new().run( File.open( filename ), STDOUT )
     end
 
+    desc 'spread_to_curve INPUT_FILE', 'Finds the spread to the benchmark yield curve (from INPUT_FILE) for each corporate bond in INPUT_FILE.'
+    def spread_to_curve( filename )
+      SpreadToCurveCommand.new().run( File.open( filename ), STDOUT )
+    end
+
   end
 
 end
