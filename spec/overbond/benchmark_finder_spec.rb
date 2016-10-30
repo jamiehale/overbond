@@ -14,12 +14,16 @@ module Overbond
     let( :benchmark1 ) { Bond.new( 'G1', 'government', 9.4, 3.7 ) }
     let( :benchmark2 ) { Bond.new( 'G2', 'government', 12, 4.8 ) }
 
+    it 'returns a BenchmarkSpread' do
+      expect( finder.find( bond, [ benchmark1 ] ) ).to be_instance_of( BenchmarkSpread )
+    end
+
     it 'returns the only benchmark if only one is passed' do
-      expect( finder.find( bond, [ benchmark1 ] ) ).to eq( benchmark1 )
+      expect( finder.find( bond, [ benchmark1 ] ).benchmark ).to eq( benchmark1 )
     end
 
     it 'returns the closest benchmark when multiple candidates are passed' do
-      expect( finder.find( bond, [ benchmark2, benchmark1 ] ) ).to eq( benchmark1 )
+      expect( finder.find( bond, [ benchmark2, benchmark1 ] ).benchmark ).to eq( benchmark1 )
     end
 
   end

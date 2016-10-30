@@ -3,10 +3,12 @@ require 'thor'
 module Overbond
 
   class CLI < Thor
-    desc 'find_benchmark BOND_ID INPUT_FILE', 'Find the benchmark for BOND_ID'
-    def find_benchmark( bond_id, input_filename )
-      puts 'bond,benchmark,spread_to_benchmark'
+
+    desc 'find_benchmarks INPUT_FILE', 'Find the benchmarks in INPUT_FILE for all corporate bonds also in INPUT_FILE.'
+    def find_benchmarks( filename )
+      FindBenchmarksCommand.new().run( File.open( filename ), STDOUT )
     end
+
   end
 
 end

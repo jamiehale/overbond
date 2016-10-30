@@ -32,6 +32,30 @@ module Overbond
         expect( bond.term_delta( Bond.new( 'C2', 'corporate', 12.4, 7.2 ) ) ).to be_within( 0.1).of( 2.1 )
       end
 
+      it 'knows it is equal to another bond' do
+        expect( bond ).to eq( Bond.new( 'C1', 'corporate', 10.3, 5.3 ) )
+      end
+
+      it 'knows it is not equal to another bond with a different id' do
+        expect( bond ).not_to eq( Bond.new( 'C4', 'corporate', 10.3, 5.3 ) )
+      end
+
+      it 'knows it is not equal to another bond with a different type' do
+        expect( bond ).not_to eq( Bond.new( 'C1', 'cumulonimbus', 10.3, 5.3 ) )
+      end
+
+      it 'knows it is not equal to another bond with a different term' do
+        expect( bond ).not_to eq( Bond.new( 'C1', 'corporate', 4.2, 5.3 ) )
+      end
+
+      it 'knows it is not equal to another bond with a different yield' do
+        expect( bond ).not_to eq( Bond.new( 'C1', 'corporate', 10.3, 19.2 ) )
+      end
+
+      it 'converts to csv' do
+        expect( bond.to_csv ).to eq( 'C1,corporate,10.3 years,5.30%' )
+      end
+
     end
 
   end

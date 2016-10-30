@@ -13,7 +13,7 @@ module Overbond
           end
         end
       end
-      benchmark
+      BenchmarkSpread.new( bond, benchmark )
     end
 
   end
