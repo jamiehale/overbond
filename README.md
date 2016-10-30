@@ -2,9 +2,7 @@
 
 This is a technical screen exercise for a job application.
 
-When it's done, there will be at least one command line utility for calculating bond spreads using several different methods.
-
-More to follow...
+It consists of a single program ("overbond") with multiple commands that solve the technical screen problems.
 
 ## Installation
 
@@ -24,17 +22,25 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+The overbond program has 2 commands: find_benchmarks and spread_to_curves.
+
+    $ overbond find_benchmarks INPUT_FILE
+
+Loops through each corporate bond in INPUT_FILE, finds the appropriate benchmark government bond (also in INPUT_FILE), and reports the spread between them.
+
+    $ overbond spread_to_curves INPUT_FILE
+
+Loops through each corporate bond in INPUT_FILE, and calculates and reports the spread to the curve created by the benchmark government bonds (also in INPUT_FILE).
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `bundle exec rspec` and `bundle exec cucumber` to run the tests.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/overbond.
+Bug reports and pull requests are welcome on GitHub at https://github.com/jamiehale/overbond.
 
 
 ## License
