@@ -2,23 +2,6 @@ module Overbond
 
   class YieldCurve
 
-    class Leg
-    
-      attr_reader :from, :to
-
-      def initialize( from, to )
-        @from = from
-        @to = to
-      end
-
-      def spread_from( bond )
-        scale = ( bond.term - @from.term ) / ( @to.term - @from.term )
-        yield_on_curve = @from.yield + scale * ( @to.yield - @from.yield )
-        bond.yield - yield_on_curve
-      end
-
-    end
-
     def initialize( bonds )
       @bonds = bonds.sort { |a,b| a.term <=> b.term }
       @legs = build_legs
@@ -42,7 +25,7 @@ module Overbond
           if last_bond.nil?
             last_bond = bond
           else
-            legs << Leg.new( last_bond, bond )
+            legs << YieldCurveLeg.new( last_bond, bond )
             last_bond = bond
           end
         end

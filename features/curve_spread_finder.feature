@@ -22,6 +22,24 @@ Feature: Curve Spread Finder
         C1,1.22%
         """
 
+    Scenario: The small example
+        Given a file named "tmp/bonds" with:
+        """
+        bond,type,term,yield
+        C1,corporate,10.3 years,5.30%
+        C2,corporate,15.2 years,8.30%
+        G1,government,9.4 years,3.70%
+        G2,government,12 years,4.80%
+        G3,government,16.3 years,5.50%
+        """
+        When I run `overbond spread_to_curve tmp/bonds`
+        Then the output should contain:
+        """
+        bond,spread_to_curve
+        C1,1.22%
+        C2,2.98%
+        """
+
     Scenario: Multiple corporate bonds
         Given a file named "tmp/bonds" with:
         """
@@ -44,12 +62,12 @@ Feature: Curve Spread Finder
         Then the output should contain:
         """
         bond,spread_to_curve
-        C1,1.22%
-        C2,2.98%
-        C3,2.00%
-        C4,2.90%
-        C5,0.90%
-        C6,1.80%
-        C7,2.50%
+        C1,1.43%
+        C2,1.63%
+        C3,2.47%
+        C4,2.27%
+        C5,1.90%
+        C6,1.57%
+        C7,2.83%
         """
 
