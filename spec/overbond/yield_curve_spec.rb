@@ -26,7 +26,7 @@ module Overbond
           end
 
           it 'calculates the spread to the linear interpolated point on the single leg' do
-            expect(curve.spread_from(bond).spread).to be_within(0.01).of(1.22)
+            expect(curve.spread_from(bond).spread).to be_within(0.001).of(1.22)
           end
         end
 
@@ -35,7 +35,7 @@ module Overbond
           let(:curve) { YieldCurve.new([benchmark1, benchmark2, benchmark3]) }
 
           it 'calculates the spread to the linear interpolated point on the appropriate leg' do
-            expect(curve.spread_from(bond).spread).to be_within(0.01).of(1.22)
+            expect(curve.spread_from(bond).spread).to be_within(0.001).of(1.22)
           end
         end
 
@@ -44,7 +44,7 @@ module Overbond
           let(:curve) { YieldCurve.new([benchmark2, benchmark1, benchmark3]) }
 
           it 'calculates the spread to the linear interpolated point on the appropriate leg' do
-            expect(curve.spread_from(bond).spread).to be_within(0.01).of(1.22)
+            expect(curve.spread_from(bond).spread).to be_within(0.001).of(1.22)
           end
         end
       end

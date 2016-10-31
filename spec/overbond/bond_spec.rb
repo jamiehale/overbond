@@ -28,11 +28,11 @@ module Overbond
       end
 
       it 'knows its term delta to another bond' do
-        expect(bond.term_delta(bond2)).to be_within(0.1).of(2.1)
+        expect(bond.term_delta(bond2)).to be_within(0.01).of(2.1)
       end
 
       it 'knows its yield delta to another bond' do
-        expect(bond.yield_delta(bond3)).to be_within(0.01).of(2.4)
+        expect(bond.yield_delta(bond3)).to be_within(0.001).of(2.4)
       end
 
       it 'knows it is equal to another bond' do
