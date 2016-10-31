@@ -24,6 +24,10 @@ module Overbond
       expect(finder.find(bond, [benchmark2, benchmark1]).benchmark).to eq(benchmark1)
     end
 
+    it 'returns the passed bond' do
+      expect(finder.find(bond, [benchmark2, benchmark1]).bond).to eq(bond)
+    end
+
     it 'throws if no candidates are passed' do
       expect { finder.find(bond, []) }.to raise_error(OverbondException)
     end

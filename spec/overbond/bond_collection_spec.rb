@@ -17,7 +17,7 @@ module Overbond
         expect(collection.count).to eq(0)
       end
 
-      describe 'adding bonds' do
+      describe 'adding a bond' do
         let(:bond) { Bond.new('C1', 'corporate', 10.3, 5.3) }
 
         before(:each) do
@@ -34,6 +34,27 @@ module Overbond
 
         it 'can index the new bond' do
           expect(collection[0]).to eq(bond)
+        end
+
+        describe 'adding another' do
+          let(:bond2) { Bond.new('C2', 'corporate', 4.3, 9.3) }
+
+          before(:each) do
+            collection << bond2
+          end
+
+          it 'is still not empty' do
+            expect(collection).not_to be_empty
+          end
+
+          it 'has a 2 count' do
+            expect(collection.count).to eq(2)
+          end
+
+          it 'can index both the old bond and the new one' do
+            expect(collection[0]).to eq(bond)
+            expect(collection[1]).to eq(bond2)
+          end
         end
       end
 
