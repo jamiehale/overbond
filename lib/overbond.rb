@@ -1,4 +1,4 @@
-require "overbond/version"
+require 'overbond/version'
 
 require 'overbond/bond'
 require 'overbond/benchmark_finder'
@@ -14,4 +14,3 @@ require 'overbond/spread_to_curve_reporter'
 require 'overbond/yield_curve'
 require 'overbond/yield_curve_leg'
 require 'overbond/curve_spread'
-

@@ -1,9 +1,11 @@
 module Overbond
-
+  ##
+  # A collection of bonds representing a curve, made up of legs from one
+  # bond to another.
+  #
   class YieldCurve
-
-    def initialize( bonds )
-      @bonds = bonds.sort { |a,b| a.term <=> b.term }
+    def initialize(bonds)
+      @bonds = bonds.sort_by(&:term)
       @legs = build_legs
     end
 
@@ -11,32 +13,25 @@ module Overbond
       true
     end
 
-    def spread_from( bond )
-      leg = find_leg_from_term( bond.term )
-      CurveSpread.new( bond, leg.spread_from( bond ) )
+    def spread_from(bond)
+      leg = find_leg_from_term(bond.term)
+      CurveSpread.new(bond, leg.spread_from(bond))
     end
 
     private
 
-      def build_legs
-        legs = []
-        last_bond = nil
-        @bonds.each do |bond|
-          if last_bond.nil?
-            last_bond = bond
-          else
-            legs << YieldCurveLeg.new( last_bond, bond )
-            last_bond = bond
-          end
-        end
-        legs
+    def build_legs
+      legs = []
+      last_bond = nil
+      @bonds.each do |bond|
+        legs << YieldCurveLeg.new(last_bond, bond) unless last_bond.nil?
+        last_bond = bond
       end
+      legs
+    end
 
-      def find_leg_from_term( term )
-        @legs.find { |l| term >= l.from.term and term <= l.to.term }
-      end
-
+    def find_leg_from_term(term)
+      @legs.find { |l| term >= l.from.term && term <= l.to.term }
+    end
   end
-
 end
-
