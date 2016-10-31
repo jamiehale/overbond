@@ -2,4 +2,10 @@
 
 require 'overbond'
 
-Overbond::CLI.start
+begin
+  Overbond::CLI.start
+rescue Overbond::OverbondException => e
+  puts e
+rescue Exception => e
+  puts e
+end
