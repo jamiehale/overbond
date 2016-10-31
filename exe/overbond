@@ -6,6 +6,6 @@ begin
   Overbond::CLI.start
 rescue Overbond::OverbondException => e
   puts e
-rescue Exception => e
+rescue StandardError => e
   puts e
 end
