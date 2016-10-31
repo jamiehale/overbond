@@ -42,9 +42,7 @@ module Overbond
         end
 
         it 'returns multiple elements for multiple well-formed lines' do
-          allow(stream).to receive(:each_line)
-            .and_yield(bond1.to_csv + "\n")
-            .and_yield(bond2.to_csv + "\n")
+          allow(stream).to receive(:each_line).and_yield(bond1.to_csv + "\n").and_yield(bond2.to_csv + "\n")
           bonds = loader.load(stream)
           expect(bonds.count).to eq(2)
           expect(bonds[0]).to eq(bond1)
@@ -70,20 +68,17 @@ module Overbond
           end
 
           it 'raises an error if the term is malformed' do
-            allow(stream).to receive(:each_line)
-              .and_yield('C1,corporate,6 months,3.30%')
+            allow(stream).to receive(:each_line).and_yield('C1,corporate,6 months,3.30%')
             expect { loader.load(stream) }.to raise_error(OverbondException)
           end
 
           it 'raises an error if the term has too many tokens' do
-            allow(stream).to receive(:each_line)
-              .and_yield('C1,corporate,6 and a half months,3.30%')
+            allow(stream).to receive(:each_line).and_yield('C1,corporate,6 and a half months,3.30%')
             expect { loader.load(stream) }.to raise_error(OverbondException)
           end
 
           it 'raises an error if the yield is malformed' do
-            allow(stream).to receive(:each_line)
-              .and_yield('C1,corporate,1.6 years,3.30')
+            allow(stream).to receive(:each_line).and_yield('C1,corporate,1.6 years,3.30')
             expect { loader.load(stream) }.to raise_error(OverbondException)
           end
         end
