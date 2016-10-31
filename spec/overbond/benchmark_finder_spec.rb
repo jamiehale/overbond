@@ -21,8 +21,11 @@ module Overbond
     end
 
     it 'returns the closest benchmark when multiple candidates are passed' do
-      expect(finder.find(bond, [benchmark2, benchmark1]).benchmark)
-        .to eq(benchmark1)
+      expect(finder.find(bond, [benchmark2, benchmark1]).benchmark).to eq(benchmark1)
+    end
+
+    it 'throws if no candidates are passed' do
+      expect { finder.find(bond, []) }.to raise_error(OverbondException)
     end
   end
 end

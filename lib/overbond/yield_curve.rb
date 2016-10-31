@@ -5,12 +5,11 @@ module Overbond
   #
   class YieldCurve
     def initialize(bonds)
-      @bonds = bonds.sort_by(&:term)
-      @legs = build_legs
+      @legs = build_legs(bonds.sort_by(&:term))
     end
 
     def empty?
-      true
+      @legs.empty?
     end
 
     def spread_from(bond)
@@ -20,12 +19,12 @@ module Overbond
 
     private
 
-    def build_legs
+    def build_legs(bonds)
       legs = []
-      last_bond = nil
-      @bonds.each do |bond|
-        legs << YieldCurveLeg.new(last_bond, bond) unless last_bond.nil?
-        last_bond = bond
+      previous_bond = nil
+      bonds.each do |bond|
+        legs << YieldCurveLeg.new(previous_bond, bond) unless previous_bond.nil?
+        previous_bond = bond
       end
       legs
     end

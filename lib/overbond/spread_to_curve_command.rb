@@ -4,8 +4,8 @@ module Overbond
   # reporting to an output stream.
   class SpreadToCurveCommand
     def initialize(options = {})
-      @loader = (options[:loader] || BondFileLoader.new)
-      @reporter = (options[:reporter] || SpreadToCurveReporter.new)
+      @loader = options[:loader] || BondFileLoader.new
+      @reporter = options[:reporter] || SpreadToCurveReporter.new
     end
 
     def run(input_stream, output_stream)

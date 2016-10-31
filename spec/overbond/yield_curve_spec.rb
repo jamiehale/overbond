@@ -21,6 +21,10 @@ module Overbond
         describe 'when the curve has a single leg' do
           let(:curve) { YieldCurve.new([benchmark1, benchmark2]) }
 
+          it 'is not empty' do
+            expect(curve).not_to be_empty
+          end
+
           it 'returns a CurveSpread' do
             expect(curve.spread_from(bond)).to be_instance_of(CurveSpread)
           end
@@ -34,6 +38,10 @@ module Overbond
           let(:benchmark3) { Bond.new('G3', 'government', 16.3, 5.5) }
           let(:curve) { YieldCurve.new([benchmark1, benchmark2, benchmark3]) }
 
+          it 'is not empty' do
+            expect(curve).not_to be_empty
+          end
+
           it 'calculates the spread to the linear interpolated point on the appropriate leg' do
             expect(curve.spread_from(bond).spread).to be_within(0.001).of(1.22)
           end
@@ -42,6 +50,10 @@ module Overbond
         describe 'when the curve has multiple legs defined out of order' do
           let(:benchmark3) { Bond.new('G3', 'government', 16.3, 5.5) }
           let(:curve) { YieldCurve.new([benchmark2, benchmark1, benchmark3]) }
+
+          it 'is not empty' do
+            expect(curve).not_to be_empty
+          end
 
           it 'calculates the spread to the linear interpolated point on the appropriate leg' do
             expect(curve.spread_from(bond).spread).to be_within(0.001).of(1.22)

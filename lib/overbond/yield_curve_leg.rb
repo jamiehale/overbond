@@ -11,13 +11,17 @@ module Overbond
     end
 
     def spread_from(bond)
-      bond.yield - (@from.yield + scale(bond) * @to.yield_delta(@from))
+      bond.yield - interpolate_yield_at(bond.term)
     end
 
     private
 
-    def scale(bond)
-      (bond.term - @from.term) / (@to.term - @from.term)
+    def interpolate_yield_at(term)
+      @from.yield + scale(term) * @to.yield_delta(@from)
+    end
+
+    def scale(term)
+      (term - @from.term) / (@to.term - @from.term)
     end
   end
 end

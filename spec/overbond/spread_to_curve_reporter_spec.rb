@@ -10,22 +10,41 @@ module Overbond
       let(:reporter) { SpreadToCurveReporter.new }
 
       describe 'reporting' do
-        let(:stream) { double('stream') }
+        let(:stream) { StringIO.new }
         let(:valid_header) { 'bond,spread_to_curve' }
 
-        before(:each) do
-          allow(stream).to receive(:puts).with(valid_header)
+        describe 'an empty set' do
+          before(:each) do
+            reporter.report(stream, [])
+          end
+
+          it 'outputs a single line' do
+            expect(stream.string.split("\n").count).to eq(1)
+          end
+
+          it 'outputs the report header' do
+            expect(stream.string).to include(valid_header)
+          end
         end
 
-        it 'outputs the report header' do
-          expect(stream).to receive(:puts).with(valid_header)
-          reporter.report(stream, [])
-        end
+        describe 'a set of spreads' do
+          let(:spread) { double('spread', to_csv: 'C1,1.22%') }
 
-        it 'outputs a line for each spread' do
-          expect(stream).to receive(:puts).with('C1,1.22%')
-          spread = double('spread', to_csv: 'C1,1.22%')
-          reporter.report(stream, [spread])
+          before(:each) do
+            reporter.report(stream, [spread])
+          end
+
+          it 'outputs 2 lines' do
+            expect(stream.string.split("\n").count).to eq(2)
+          end
+
+          it 'outputs the report header' do
+            expect(stream.string).to include(valid_header)
+          end
+
+          it 'outputs a line for each spread' do
+            expect(stream.string).to include('C1,1.22%')
+          end
         end
       end
     end
